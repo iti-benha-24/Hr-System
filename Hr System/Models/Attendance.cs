@@ -13,6 +13,6 @@ namespace Hr_System.Models
         // Navigation property to Employee
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public Employee? Employee { get; set; }
     }
 }
