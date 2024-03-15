@@ -57,7 +57,6 @@ namespace Hr_System
                 });
 
 
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<HrDbContext>();
             builder.Services.AddScoped<Ipublicholidayrepo , Publicholidayrepo>();
 
             builder.Services.AddScoped<IAttendanceRepo, AttendanceRepo>();
