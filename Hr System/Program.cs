@@ -1,6 +1,7 @@
 
 using Hr_System.Data;
 using Hr_System.Models;
+using Hr_System.Reposatories.PublicHolidayReposatry;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,7 @@ namespace Hr_System
 
             builder.Services.AddDbContext<HrDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("constr")));
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<HrDbContext>();
+            builder.Services.AddScoped<Ipublicholidayrepo , Publicholidayrepo>();
 
             builder.Services.AddCors(options =>
             {
