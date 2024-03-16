@@ -1,5 +1,5 @@
 ﻿using Hr_System.Models;
-using Hr_System.Reposatories.PublicHolidayReposatry;
+using Hr_System.Repositories.PublicHolidayReposatry;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hr_System.Controllers

@@ -6,11 +6,11 @@ using Hr_System.Models;
 using Hr_System.Sevices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Hr_System.Repositories.AttendanceRepo;
-using Hr_System.Reposatories.PublicHolidayReposatry;
 using Hr_System.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Hr_System.Repositories.PublicHolidayReposatry;
 
 namespace Hr_System
 {

@@ -1,4 +1,4 @@
-﻿using Hr_System.DTO;
+﻿using Hr_System.Dtos;
 using Hr_System.Models;
 
 namespace Hr_System.Repositories
