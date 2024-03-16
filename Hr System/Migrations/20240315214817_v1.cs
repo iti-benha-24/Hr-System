@@ -17,26 +17,6 @@ namespace Hr_System.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             
-                name: "IsDeleted",
-                table: "Departments",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
-                name: "IsDeleted",
-                table: "Departments",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
-                name: "IsDeleted",
-                table: "Departments",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
-                name: "IsDeleted",
-                table: "Departments",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
         }
     }
 }
