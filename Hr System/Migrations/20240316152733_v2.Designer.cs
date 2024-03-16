@@ -4,6 +4,7 @@ using Hr_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hr_System.Migrations
 {
     [DbContext(typeof(HrDbContext))]
-    partial class HrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240316152733_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,6 +172,9 @@ namespace Hr_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("GeneralSettingId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
 
@@ -197,6 +203,10 @@ namespace Hr_System.Migrations
 
                     b.HasIndex("DepartmentId");
 
+                    b.HasIndex("GeneralSettingId")
+                        .IsUnique()
+                        .HasFilter("[GeneralSettingId] IS NOT NULL");
+
                     b.ToTable("Employees");
                 });
 
@@ -219,9 +229,7 @@ namespace Hr_System.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId")
-                        .IsUnique()
-                        .HasFilter("[EmployeeId] IS NOT NULL");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("GeneralSettings");
                 });
@@ -420,14 +428,20 @@ namespace Hr_System.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Hr_System.Models.GeneralSettings", "GeneralSettings")
+                        .WithOne()
+                        .HasForeignKey("Hr_System.Models.Employee", "GeneralSettingId");
+
                     b.Navigation("Department");
+
+                    b.Navigation("GeneralSettings");
                 });
 
             modelBuilder.Entity("Hr_System.Models.GeneralSettings", b =>
                 {
                     b.HasOne("Hr_System.Models.Employee", "Employee")
-                        .WithOne("GeneralSettings")
-                        .HasForeignKey("Hr_System.Models.GeneralSettings", "EmployeeId");
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Employee");
                 });
@@ -502,8 +516,6 @@ namespace Hr_System.Migrations
             modelBuilder.Entity("Hr_System.Models.Employee", b =>
                 {
                     b.Navigation("Attendance");
-
-                    b.Navigation("GeneralSettings");
                 });
 
             modelBuilder.Entity("Hr_System.Models.GeneralSettings", b =>

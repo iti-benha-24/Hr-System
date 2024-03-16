@@ -25,6 +25,7 @@ namespace Hr_System.Models
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
         public ICollection<Attendance>? Attendance { get; set; }
-        public ICollection<GeneralSettings>? GeneralSettings { get; set; }
+
+        public GeneralSettings? GeneralSettings { get; set; }
     }
 }
