@@ -1,7 +1,7 @@
 ﻿using Hr_System.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Hr_System.Reposatories.PublicHolidayReposatry
+namespace Hr_System.Repositories.PublicHolidayReposatry
 {
     public interface Ipublicholidayrepo
     {

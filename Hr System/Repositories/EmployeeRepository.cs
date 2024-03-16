@@ -1,5 +1,5 @@
 ﻿using Hr_System.Data;
-using Hr_System.DTO;
+using Hr_System.Dtos;
 using Hr_System.Models;
 using Microsoft.EntityFrameworkCore;
 

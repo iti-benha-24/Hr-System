@@ -2,7 +2,7 @@
 using Hr_System.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Hr_System.Reposatories.PublicHolidayReposatry
+namespace Hr_System.Repositories.PublicHolidayReposatry
 {
     public class Publicholidayrepo : Ipublicholidayrepo
     {
@@ -19,23 +19,23 @@ namespace Hr_System.Reposatories.PublicHolidayReposatry
         }
         public bool AddNewHoliday(PublicHolidays publicHolidays)
         {
-            
+
             _context.PublicHolidays.Add(publicHolidays);
             _context.SaveChanges();
             return true;
         }
 
-      
+
         public bool Delete(int id)
         {
             holidays = _context.PublicHolidays.Find(id);
-            if(holidays == null) return false; 
+            if (holidays == null) return false;
             _context.PublicHolidays.Remove(holidays);
             _context.SaveChanges();
             return true;
         }
 
-    
+
         public bool Update(int id, PublicHolidays updatedHoliday)
         {
             holidays = _context.PublicHolidays.Find(id);
@@ -43,13 +43,13 @@ namespace Hr_System.Reposatories.PublicHolidayReposatry
                 return false;
 
 
-        holidays.Name = updatedHoliday.Name;
-        holidays.Day = updatedHoliday.Day;
+            holidays.Name = updatedHoliday.Name;
+            holidays.Day = updatedHoliday.Day;
 
 
-        _context.SaveChanges();
+            _context.SaveChanges();
 
             return true;
-    }
+        }
     }
 }
