@@ -17,5 +17,9 @@ namespace Hr_System.Data
         {
             
         }
+        public HrDbContext()
+        {
+            
+        }
     }
 }

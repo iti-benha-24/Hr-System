@@ -6,9 +6,11 @@ using Hr_System.Models;
 using Hr_System.Sevices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Hr_System.Repositories.AttendanceRepo;
+using Hr_System.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Hr_System.Repositories.PublicHolidayReposatry;
 
 namespace Hr_System
 {
@@ -30,6 +32,9 @@ namespace Hr_System
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<EmployeeRepository>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
 
             builder.Services.AddDbContext<HrDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("constr")));
             builder.Services.AddAuthentication(options =>
@@ -55,6 +60,8 @@ namespace Hr_System
 
                 });
 
+
+            builder.Services.AddScoped<Ipublicholidayrepo , Publicholidayrepo>();
 
             builder.Services.AddScoped<IAttendanceRepo, AttendanceRepo>();
             builder.Services.AddCors(options =>
