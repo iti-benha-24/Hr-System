@@ -3,7 +3,7 @@ using Hr_System.Dtos;
 using Hr_System.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hr_System.Repositories
+namespace Hr_System.Repositories.EmployeeRepository
 {
     public class EmployeeRepository : IEmployeeRepository
     {
@@ -75,7 +75,7 @@ namespace Hr_System.Repositories
                     DepartmentId = e.DepartmentId,
                     DepartmentName = e.Department.DeptName
                 })
-                .ToListAsync(); 
+                .ToListAsync();
 
             return employees;
         }

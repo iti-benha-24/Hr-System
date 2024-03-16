@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Hr_System.Data;
 using Hr_System.Models;
-using Hr_System.DTO;
-using Hr_System.Repositories;
+using Hr_System.Dtos;
+using Hr_System.Repositories.EmployeeRepository;
 
 namespace Hr_System.Controllers
 {
