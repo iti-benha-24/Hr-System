@@ -1,7 +1,7 @@
 ﻿using Hr_System.Dtos;
 using Hr_System.Models;
 
-namespace Hr_System.Repositories
+namespace Hr_System.Repositories.EmployeeRepository
 {
     public interface IEmployeeRepository
     {

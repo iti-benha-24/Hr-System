@@ -10,13 +10,33 @@ namespace Hr_System.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+           
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            
+                name: "IsDeleted",
+                table: "Departments",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+                name: "IsDeleted",
+                table: "Departments",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+                name: "IsDeleted",
+                table: "Departments",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+                name: "IsDeleted",
+                table: "Departments",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
         }
     }
 }
