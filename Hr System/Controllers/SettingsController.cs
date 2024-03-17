@@ -1,5 +1,6 @@
 ﻿using Hr_System.Dtos;
 using Hr_System.Models;
+using Hr_System.Repositories.AttendanceRepo;
 using Hr_System.Repositories.SettingsRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,16 @@ namespace Hr_System.Controllers
             _settingsRepository.CreateSetting(id, settingsDTO);
             return Ok();
 
+        }
+        [HttpPut("EditSetting/{id}")]
+        public ActionResult EditSetting(int id, SettingsDTO settingsDTO)
+        {
+
+            if (settingsDTO == null) return BadRequest();
+            if (id != settingsDTO.Id) return BadRequest();
+            _settingsRepository.EditSettings(settingsDTO);
+
+            return Ok();
         }
     }
 }
