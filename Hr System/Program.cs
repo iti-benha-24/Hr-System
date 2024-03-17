@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Hr_System.Repositories.PublicHolidayReposatry;
 using Hr_System.Repositories.EmployeeRepository;
+using Hr_System.Repositories.SettingsRepository;
 
 namespace Hr_System
 {
@@ -34,6 +35,8 @@ namespace Hr_System
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<EmployeeRepository>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<ISettingsRepository, SettingsRepository>();
+
 
 
             builder.Services.AddDbContext<HrDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("constr")));
