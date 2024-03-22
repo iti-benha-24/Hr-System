@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hr_System.Migrations
 {
     [DbContext(typeof(HrDbContext))]
-    [Migration("20240316154259_Final")]
-    partial class Final
+    [Migration("20240322211900_intialCreate")]
+    partial class intialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
