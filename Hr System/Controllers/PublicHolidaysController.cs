@@ -8,13 +8,13 @@ namespace Hr_System.Controllers
     [ApiController]
     public class PublicHolidaysController : ControllerBase
     {
-       
+
         private readonly Ipublicholidayrepo repo;
         private bool result;
 
-        public PublicHolidaysController(  Ipublicholidayrepo repo)
+        public PublicHolidaysController(Ipublicholidayrepo repo)
         {
-            
+
             this.repo = repo;
         }
 
@@ -28,11 +28,21 @@ namespace Hr_System.Controllers
             return publicHolidays;
         }
 
+        //getByID holidays
+        [HttpGet("getById /{id}")]
+
+        public PublicHolidays getById(int id)
+        {
+            var holiday = repo.getById(id);
+
+                return holiday;
+        }
 
         //insert new holiday
         [HttpPost("AddNewHoliday")]
         public ActionResult AddNewHoliday( PublicHolidays publicHolidays)
         {
+            
             if (publicHolidays == null)
                 return BadRequest("Holiday data is null");
             
@@ -56,6 +66,7 @@ namespace Hr_System.Controllers
         [HttpPut("Update/{id}")]
         public ActionResult Update(int id, PublicHolidays updatedHoliday)
         {
+            updatedHoliday.Id = id;
             if (updatedHoliday == null)
                 return NotFound();
             if (updatedHoliday.Id != id)

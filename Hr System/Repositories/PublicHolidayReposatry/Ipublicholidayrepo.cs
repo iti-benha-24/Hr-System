@@ -9,5 +9,7 @@ namespace Hr_System.Repositories.PublicHolidayReposatry
         bool AddNewHoliday(PublicHolidays publicHolidays);
         bool Delete(int id);
         bool Update(int id, PublicHolidays updatedHoliday);
+        PublicHolidays getById(int id);
+
     }
 }

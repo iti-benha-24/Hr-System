@@ -51,5 +51,12 @@ namespace Hr_System.Repositories.PublicHolidayReposatry
 
             return true;
         }
+
+        public PublicHolidays getById(int id)
+        {
+           var holiday = _context.PublicHolidays.Find(id);
+            return holiday;
+            
+        }
     }
 }
