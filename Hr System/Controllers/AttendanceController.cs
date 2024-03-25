@@ -5,6 +5,7 @@ using Hr_System.Repositories.AttendanceRepo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Hr_System.Controllers
 {
@@ -29,10 +30,11 @@ namespace Hr_System.Controllers
                 var attDto = new AttendanceDto()
                 {
                    Id=att.Id,
-                    Date = att.Date,
+                    Date = new DateOnly(att.Date.Year, att.Date.Month, att.Date.Day),
                     ArrivalTime = att.ArrivalTime,
                     LeaveTime = att.LeaveTime,
                     EmployeeName = att.Employee.FirstName,
+                    employeeId=att.Employee.Id,
                     DepartmentName=att.Employee.Department.DeptName
                 };
                 attDtos.Add(attDto);
@@ -49,10 +51,11 @@ namespace Hr_System.Controllers
             var attdto = new AttendanceDto()
             {
                 Id = att.Id,
-                Date = att.Date,
+                Date = new DateOnly(att.Date.Year, att.Date.Month, att.Date.Day),
                 ArrivalTime = att.ArrivalTime,
                 LeaveTime = att.LeaveTime,
                 EmployeeName = att.Employee.FirstName ,
+                employeeId=att.Employee.Id,
                 DepartmentName=att.Employee.Department.DeptName
             };
 
@@ -73,9 +76,9 @@ namespace Hr_System.Controllers
         [HttpPut("EditEmployeeAttendance/{id}")]
         public ActionResult EditEmployeeAttendance(int id,Attendance attendance)
         {
-          
+            attendance.Id = id;
             if (attendance == null) return BadRequest();
-            if(id != attendance.Id) return BadRequest();
+           
             attendanceRepo.EditEmployeeAttendance(attendance);
             attendanceRepo.Save();
            
@@ -102,10 +105,11 @@ namespace Hr_System.Controllers
                 AttendanceDto attdto = new AttendanceDto()
                 {
                     Id=item.Id,
-                    Date=item.Date,
+                    Date= new DateOnly(item.Date.Year, item.Date.Month, item.Date.Day),
                     ArrivalTime=item.ArrivalTime,
                     LeaveTime=item.LeaveTime,
                     EmployeeName=item.Employee.FirstName,
+                    employeeId=item.Employee.Id,
                     DepartmentName=item.Employee.Department.DeptName
                     
                 };
@@ -125,10 +129,11 @@ namespace Hr_System.Controllers
                 AttendanceDto attdto = new AttendanceDto()
                 {
                     Id = item.Id,
-                    Date = item.Date,
+                    Date = new DateOnly(item.Date.Year, item.Date.Month, item.Date.Day),
                     ArrivalTime = item.ArrivalTime,
                     LeaveTime = item.LeaveTime,
                     EmployeeName = item.Employee.FirstName,
+                    employeeId=item.Employee.Id,
                     DepartmentName = item.Employee.Department.DeptName
 
                 };

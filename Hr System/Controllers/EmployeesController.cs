@@ -48,10 +48,8 @@ namespace Hr_System.Controllers
         [HttpPut("PutEmployee/{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
-            if (id != employee.Id)
-            {
-                return BadRequest();
-            }
+            employee.Id = id;
+            if (employee == null) return BadRequest();
             await Employee_Repo.UpdateEmployee(employee);
             return NoContent();
         }
