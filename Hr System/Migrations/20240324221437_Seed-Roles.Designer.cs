@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hr_System.Migrations
 {
     [DbContext(typeof(HrDbContext))]
-    [Migration("20240315204117_Seed-Roles")]
+    [Migration("20240324221437_Seed-Roles")]
     partial class SeedRoles
     {
         /// <inheritdoc />
@@ -134,9 +134,6 @@ namespace Hr_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Departments");
@@ -225,7 +222,9 @@ namespace Hr_System.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("EmployeeId")
+                        .IsUnique()
+                        .HasFilter("[EmployeeId] IS NOT NULL");
 
                     b.ToTable("GeneralSettings");
                 });
@@ -430,8 +429,8 @@ namespace Hr_System.Migrations
             modelBuilder.Entity("Hr_System.Models.GeneralSettings", b =>
                 {
                     b.HasOne("Hr_System.Models.Employee", "Employee")
-                        .WithMany("GeneralSettings")
-                        .HasForeignKey("EmployeeId");
+                        .WithOne("GeneralSettings")
+                        .HasForeignKey("Hr_System.Models.GeneralSettings", "EmployeeId");
 
                     b.Navigation("Employee");
                 });

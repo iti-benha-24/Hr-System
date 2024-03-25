@@ -32,5 +32,27 @@ namespace Hr_System.Repositories.SettingsRepository
                 _Context.SaveChanges();
             }
         }
+
+        public void EditSettings(SettingsDTO settingsDTO)
+        {
+            GeneralSettings GS  = _Context.GeneralSettings.Where( X =>X.Id == settingsDTO.Id).FirstOrDefault();
+            if(GS != null)
+            {
+                GS.OvertimeHour = settingsDTO.OvertimeHour;
+                GS.DiscountHour = settingsDTO.DiscountHour;
+                GS.Weekends = settingsDTO.WeekendDays.Select(w => new Weekend
+                {
+                    Name = w.Day
+                }).ToList();
+
+
+
+                _Context.GeneralSettings.Update(GS);
+                _Context.SaveChanges();
+            }
+
+           
+
+        }
     }
 }

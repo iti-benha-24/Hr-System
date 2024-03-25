@@ -11,7 +11,6 @@ namespace Hr_System.Dtos
 
         public List<WeekendDTO> WeekendDays { get; set; }
 
-        //public string EmployeeName { get; set; }
 
 
 

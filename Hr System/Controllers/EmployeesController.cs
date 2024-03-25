@@ -9,6 +9,7 @@ using Hr_System.Data;
 using Hr_System.Models;
 using Hr_System.Dtos;
 using Hr_System.Repositories.EmployeeRepository;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Hr_System.Controllers
 {
@@ -49,7 +50,10 @@ namespace Hr_System.Controllers
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
             employee.Id = id;
-            if (employee == null) return BadRequest();
+            if(employee == null)
+            {
+                return BadRequest();
+            }
             await Employee_Repo.UpdateEmployee(employee);
             return NoContent();
         }

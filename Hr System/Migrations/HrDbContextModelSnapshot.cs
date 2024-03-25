@@ -234,8 +234,8 @@ namespace Hr_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Day")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("Day")
+                        .HasColumnType("date");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -2,7 +2,6 @@
 {
     public class WeekendDTO
     {
-        //public int Id { get; set; }
         public string Day { get; set; }
     }
 }
