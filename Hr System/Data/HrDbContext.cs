@@ -10,7 +10,6 @@ namespace Hr_System.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<GeneralSettings> GeneralSettings { get; set; }
-        public DbSet<Weekend> Weekends { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<PublicHolidays> PublicHolidays { get; set; }
         public HrDbContext(DbContextOptions<HrDbContext> options):base(options)

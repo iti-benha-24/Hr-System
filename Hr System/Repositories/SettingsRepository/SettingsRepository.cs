@@ -22,30 +22,25 @@ namespace Hr_System.Repositories.SettingsRepository
                 {
                     EmployeeId = id,
                     OvertimeHour = settingsDTO.OvertimeHour,
-                    DiscountHour = settingsDTO.DiscountHour, 
-                    Weekends = settingsDTO.WeekendDays.Select( w => new Weekend
-                    {
-                        Name = w.Day
-                    }).ToList(),
+                    DiscountHour = settingsDTO.DiscountHour,
+                    Weekend1 = settingsDTO.Weekend1,
+                    Weekend2 = settingsDTO.Weekend2,
+                    
                 };
                 _Context.GeneralSettings.Add(GS);
                 _Context.SaveChanges();
             }
         }
 
-        public void EditSettings(SettingsDTO settingsDTO)
+        public void EditSettings( int empId,SettingsDTO settingsDTO)
         {
-            GeneralSettings GS  = _Context.GeneralSettings.Where( X =>X.Id == settingsDTO.Id).FirstOrDefault();
+            GeneralSettings GS  = _Context.GeneralSettings.Where( X =>X.EmployeeId == empId).FirstOrDefault();
             if(GS != null)
             {
                 GS.OvertimeHour = settingsDTO.OvertimeHour;
                 GS.DiscountHour = settingsDTO.DiscountHour;
-                GS.Weekends = settingsDTO.WeekendDays.Select(w => new Weekend
-                {
-                    Name = w.Day
-                }).ToList();
-
-
+                GS.Weekend1 = settingsDTO.Weekend1;
+                GS.Weekend2 = settingsDTO.Weekend2;
 
                 _Context.GeneralSettings.Update(GS);
                 _Context.SaveChanges();
@@ -53,6 +48,16 @@ namespace Hr_System.Repositories.SettingsRepository
 
            
 
+        }
+
+       
+
+        public GeneralSettings GeneralSettingsByEmpId(int empId)
+        {
+            GeneralSettings GS = _Context.GeneralSettings.Where(X => X.EmployeeId == empId).FirstOrDefault();
+           
+
+            return GS;
         }
     }
 }
