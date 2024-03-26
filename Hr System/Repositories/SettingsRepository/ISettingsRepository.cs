@@ -8,8 +8,9 @@ namespace Hr_System.Repositories.SettingsRepository
     public interface ISettingsRepository
     {
          void CreateSetting(int id , SettingsDTO  settingsDTO);
-        void EditSettings(SettingsDTO settingsDTO);
+         void EditSettings(int empId,SettingsDTO settingsDTO);
 
+        GeneralSettings GeneralSettingsByEmpId(int empId);
 
     }
 }

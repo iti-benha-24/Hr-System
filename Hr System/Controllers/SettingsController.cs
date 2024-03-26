@@ -33,10 +33,28 @@ namespace Hr_System.Controllers
         {
 
             if (settingsDTO == null) return BadRequest();
-            if (id != settingsDTO.Id) return BadRequest();
-            _settingsRepository.EditSettings(settingsDTO);
+            _settingsRepository.EditSettings(id,settingsDTO);
 
             return Ok();
+        }
+        [HttpGet("GetSettingByEmpId/{id}")]
+        public SettingsDTO GetSettingByEmpId(int id)
+        {
+
+            GeneralSettings Gs = _settingsRepository.GeneralSettingsByEmpId(id);
+            if (Gs == null)
+            {
+                return null;
+            }
+            SettingsDTO settingsDTO = new SettingsDTO
+            {
+                OvertimeHour = Gs.OvertimeHour,
+                DiscountHour = Gs.DiscountHour,
+                Weekend1 = Gs.Weekend1,
+                Weekend2 = Gs.Weekend2,
+            };
+
+            return settingsDTO;
         }
     }
 }
