@@ -72,7 +72,7 @@ namespace Hr_System.Sevices
                 return new AuthModel { Message = errors };
             }
 
-            await _userManager.AddToRoleAsync(user, "Manager");
+            await _userManager.AddToRoleAsync(user, model.roleName);
 
             var jwtSecurityToken = await CreateJwtToken(user);
 
@@ -81,7 +81,7 @@ namespace Hr_System.Sevices
                 Email = user.Email,
                 ExpiresOn = jwtSecurityToken.ValidTo,
                 IsAuthenticated = true,
-                Roles = new List<string> { "Manager" },
+                Roles = new List<string> { model.roleName },
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 Username = model.Username
             };

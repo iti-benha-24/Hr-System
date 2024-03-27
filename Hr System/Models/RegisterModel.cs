@@ -15,5 +15,6 @@ namespace Hr_System.Models
         [Required, StringLength(256)]
         public string Email { get; set; }
 
+        public string roleName { get; set; }
     }
 }
