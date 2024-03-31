@@ -31,10 +31,8 @@ namespace Hr_System.Sevices
                 authModel.Message = "Email or Password is incorrect!";
                 return authModel;
             }
-
             var jwtSecurityToken = await CreateJwtToken(user);
             var rolesList = await _userManager.GetRolesAsync(user);
-
             authModel.IsAuthenticated = true;
             authModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             authModel.Email = user.Email;
