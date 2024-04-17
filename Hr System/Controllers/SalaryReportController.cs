@@ -30,10 +30,16 @@ namespace Hr_System.Controllers
                 int discountHours = 0;
                 foreach (var item2 in item.Attendance)
                 {
-
-                    additionalHours += Convert.ToInt32((int)item2.LeaveTime.Value.TotalHours - (int)item.LeaveTime.TotalHours);
-                    discountHours += Convert.ToInt32((int)item2.ArrivalTime.TotalHours - (int)item.ArrivalTime.TotalHours);
-
+                    if (item2.LeaveTime == null)
+                    {
+                        additionalHours += 0;
+                        discountHours += 0;
+                    }
+                    else
+                    {
+                        additionalHours += (int)item2.LeaveTime.Value.TotalHours - (int)item.LeaveTime.TotalHours;
+                        discountHours += (int)item2.ArrivalTime.TotalHours - (int)item.ArrivalTime.TotalHours;
+                    }
                 }
                 var absent = 22 - item.Attendance.Count();
                 var totalAditionalHours = Math.Round((additionalHours * item.GeneralSettings.OvertimeHour) * ((item.Salary / 22) / (item.LeaveTime.Hours - item.ArrivalTime.Hours)), 2);
@@ -50,7 +56,7 @@ namespace Hr_System.Controllers
                     Discount_hours=discountHours,
                     TotalAditionalHours =totalAditionalHours,
                     TotalDiscountHours=totalDiscountHours,
-                    TotalNetSalary= Math.Round((item.Salary + totalAditionalHours) - totalDiscountHours,2)
+                    TotalNetSalary= Math.Round((((item.Salary / 22) * item.Attendance.Count()) + totalAditionalHours) - totalDiscountHours,2)
 
                 };
 
@@ -74,10 +80,16 @@ namespace Hr_System.Controllers
                 int discountHours = 0;
                 foreach (var item2 in item.Attendance)
                 {
-
-                    additionalHours += Convert.ToInt32((int)item2.LeaveTime.Value.TotalHours - (int)item.LeaveTime.TotalHours);
-                    discountHours += Convert.ToInt32((int)item2.ArrivalTime.TotalHours - (int)item.ArrivalTime.TotalHours);
-
+                    if (item2.LeaveTime == null)
+                    {
+                        additionalHours += 0;
+                        discountHours += 0;
+                    }
+                    else
+                    {
+                        additionalHours += (int)item2.LeaveTime.Value.TotalHours - (int)item.LeaveTime.TotalHours;
+                        discountHours += (int)item2.ArrivalTime.TotalHours - (int)item.ArrivalTime.TotalHours;
+                    }
                 }
                 var absent = 22 - item.Attendance.Count();
                 var totalAditionalHours = Math.Round((additionalHours * item.GeneralSettings.OvertimeHour) * ((item.Salary / 22) / (item.LeaveTime.Hours - item.ArrivalTime.Hours)), 2);
@@ -94,7 +106,7 @@ namespace Hr_System.Controllers
                     Discount_hours=discountHours,
                     TotalAditionalHours =totalAditionalHours,
                     TotalDiscountHours=totalDiscountHours,
-                    TotalNetSalary= Math.Round((item.Salary + totalAditionalHours) - totalDiscountHours,2)
+                    TotalNetSalary= Math.Round((((item.Salary / 22) * item.Attendance.Count()) + totalAditionalHours) - totalDiscountHours,2)
                 };
 
                 empsDtos.Add(salaryDto);
@@ -106,20 +118,27 @@ namespace Hr_System.Controllers
         [HttpGet("FilterSalaryReportByName")]
         public List<SalaryReportDto> FilterSalaryReportByName(string name)
         {
+
             var emps = db.Attendances.Include(x => x.Employee).Include(x=>x.Employee.Department).Include(x=>x.Employee.GeneralSettings).Where(x=>x.Employee.FirstName.Contains(name)).ToList();
             
             var empsDtos = new List<SalaryReportDto>();
       
-            foreach (var item in emps.Select(x=>x.Employee))
+            foreach (var item in emps.Select(x=>x.Employee).Distinct())
             {
                 int additionalHours = 0;
                 int discountHours = 0;
                 foreach (var item2 in item.Attendance)
                 {
-
-                    additionalHours += Convert.ToInt32((int)item2.LeaveTime.Value.TotalHours - (int)item.LeaveTime.TotalHours);
-                    discountHours += Convert.ToInt32((int)item2.ArrivalTime.TotalHours - (int)item.ArrivalTime.TotalHours);
-
+                    if(item2.LeaveTime == null)
+                    {
+                        additionalHours += 0;
+                        discountHours += 0;
+                    }
+                    else
+                    {
+                    additionalHours += (int)item2.LeaveTime.Value.TotalHours - (int)item.LeaveTime.TotalHours;
+                    discountHours += (int)item2.ArrivalTime.TotalHours - (int)item.ArrivalTime.TotalHours;
+                    } 
                 }
                 var absent = 22 - item.Attendance.Count();
                 var totalAditionalHours = Math.Round((additionalHours * item.GeneralSettings.OvertimeHour) * ((item.Salary / 22) / (item.LeaveTime.Hours - item.ArrivalTime.Hours)), 2);
@@ -136,7 +155,7 @@ namespace Hr_System.Controllers
                     Discount_hours=discountHours,
                     TotalAditionalHours =totalAditionalHours,
                     TotalDiscountHours=totalDiscountHours,
-                    TotalNetSalary= Math.Round((item.Salary + totalAditionalHours) - totalDiscountHours,2)
+                    TotalNetSalary= Math.Round((((item.Salary / 22) * item.Attendance.Count()) + totalAditionalHours) - totalDiscountHours,2)
                 };
 
                 empsDtos.Add(salaryDto);

@@ -16,7 +16,7 @@ namespace Hr_System.Repositories.EmployeeRepository
 
         public async Task<IEnumerable<Employee>> GetEmployees()
         {
-            return await Con.Employees.ToListAsync();
+            return await Con.Employees.Include(x=>x.Department).ToListAsync();
         }
 
         public async Task<IEnumerable<Department>> GetDepartments()
@@ -31,6 +31,15 @@ namespace Hr_System.Repositories.EmployeeRepository
 
         public async Task AddEmployee(Employee employee)
         {
+            var general = new GeneralSettings()
+            {
+                DiscountHour = 1,
+                OvertimeHour = 1,
+                Weekend1 = "Friday",
+                Weekend2 = "Saturday"
+            };
+            employee.GeneralSettings = general;
+           
             Con.Employees.Add(employee);
             await Con.SaveChangesAsync();
         }

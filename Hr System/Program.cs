@@ -13,6 +13,7 @@ using Hr_System.Repositories.PublicHolidayReposatry;
 using Hr_System.Repositories.EmployeeRepository;
 using Hr_System.Repositories.SettingsRepository;
 using System.Text.Json.Serialization;
+using Hr_System.Repositories.DepartmentRepository;
 
 namespace Hr_System
 {
@@ -40,6 +41,7 @@ namespace Hr_System
             builder.Services.AddScoped<EmployeeRepository>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<ISettingsRepository, SettingsRepository>();
+            builder.Services.AddScoped<IDeparmentRepository, DepartmentRepository>();
 
 
 

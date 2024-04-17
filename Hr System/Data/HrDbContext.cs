@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Hr_System.Data
 {
@@ -22,5 +23,14 @@ namespace Hr_System.Data
         {
             
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<GeneralSettings>()
+           .HasOne(gs => gs.Employee)
+           .WithOne(e => e.GeneralSettings)
+           .HasForeignKey<GeneralSettings>(gs => gs.EmployeeId)
+           .OnDelete(DeleteBehavior.Cascade);
+                }
     }
 }

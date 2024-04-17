@@ -254,7 +254,8 @@ namespace Hr_System.Migrations
                         name: "FK_GeneralSettings_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "Id");
+                        principalColumn: "Id"
+                        );
                 });
 
             migrationBuilder.CreateTable(

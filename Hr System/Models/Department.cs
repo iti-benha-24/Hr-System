@@ -9,6 +9,6 @@ namespace Hr_System.Models
         public string DeptName { get; set;}
 
         // Navigation property to Employees
-        public ICollection<Employee> Employees { get; set; }
+        public ICollection<Employee>? Employees { get; set; }
     }
 }
